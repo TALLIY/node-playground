@@ -1,5 +1,5 @@
 {
-  "name": "01-web-spider",
+  "name": "02-web-spider-functions",
   "version": "1.0.0",
   "engines": {
     "node": ">=14"
@@ -19,5 +19,7 @@
     "slug": "^1.1.0",
     "superagent": "^5.2.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/slug": "^5.0.8"
+  }
 }
