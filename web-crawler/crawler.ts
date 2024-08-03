@@ -1,8 +1,8 @@
-import fs from "fs";
+import fs, { NoParamCallback } from "fs";
 import path from "path";
 import { urlToFilename } from "./utils";
 import superagent from "superagent";
-import mkdirp from './types/mkdirp';
+import mkdirp from "./types/mkdirp";
 
 export const crawler = (url: string, cb: (...args: unknown[]) => unknown) => {
   const file = fs.readFile(
@@ -20,7 +20,11 @@ export const crawler = (url: string, cb: (...args: unknown[]) => unknown) => {
   );
 };
 
-const saveFile = (filename, contents, cb) => {
+const saveFile = (
+  filename: string,
+  contents: string | NodeJS.ArrayBufferView,
+  cb: NoParamCallback
+) => {
   mkdirp(path.dirname(filename), (err) => {
     if (err) {
       return cb(err);
@@ -35,7 +39,7 @@ const download = (
   cb: (...args: unknown[]) => unknown
 ) => {
   console.log(`Downloading ${url}`);
-  superagent.get(url).end((err, res) => {
+  superagent.get(url).end((err: Error| null, res) => {
     if (err) {
       return cb(err);
     }
